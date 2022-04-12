@@ -25,6 +25,7 @@ namespace FolderWatcher
 
         public void Run()
         {
+            Console.WriteLine("Już działm");
             do
             {
                 try
@@ -40,7 +41,7 @@ namespace FolderWatcher
                                          | NotifyFilters.Security
                                          | NotifyFilters.Size;
 
-                    watcher.Changed += OnChanged;
+                  //  watcher.Changed += OnChanged;
                     watcher.Created += OnCreated;
                     watcher.Deleted += OnDeleted;
                     watcher.Renamed += OnRenamed;
@@ -49,7 +50,8 @@ namespace FolderWatcher
                     //  watcher.Filter = "*.txt";
                     watcher.IncludeSubdirectories = true;
                     watcher.EnableRaisingEvents = true;
-                    Console.WriteLine("Już działm");
+
+                    Console.ReadKey();
                 }
                 catch (Exception)
                 {
