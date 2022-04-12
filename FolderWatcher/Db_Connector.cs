@@ -1,5 +1,6 @@
 ﻿using Microsoft.Data.Sqlite;
 using System;
+using System.Threading.Tasks;
 
 namespace FolderWatcher
 {
@@ -8,16 +9,15 @@ namespace FolderWatcher
         public SqliteConnection sqlite_conn { get; set; }
         public Db_Connector()
         {
-           // SqliteConnection sqlite_conn;
+        
             sqlite_conn = CreateConnection();
             CreateTable(sqlite_conn);
-            //InsertData(sqlite_conn);
-            //ReadData(sqlite_conn);
+           
         }
+
         public SqliteConnection CreateConnection()
         {
-           // SQLiteConnection.CreateFile("MyDatabase.sqlite");
-            //SqliteConnection.CreateFile(@"C:\Users\DQL\Downloads\Test Excel\Nowy folder\synccc.sqlite");
+
 
             SqliteConnection sqlite_conn;
            // sqlite_conn.cre
@@ -58,13 +58,13 @@ namespace FolderWatcher
 
         }
 
-        public void InsertData(string state, string path, string data)
+        public async void  InsertData(string state, string path, string data)
         {
             SqliteCommand sqlite_cmd;
             //sqlite_cmd = conn.CreateCommand();
             sqlite_cmd = this.sqlite_conn.CreateCommand();
             sqlite_cmd.CommandText = $"INSERT INTO logs  (State, FilePath, Data) VALUES('{state}', '{path}','{data}'); "; //VALUES('Test Text ', 1); 
-            sqlite_cmd.ExecuteNonQuery();
+            await sqlite_cmd.ExecuteNonQueryAsync(); //sqlite_cmd.ExecuteNonQuery();
         }
 
         public void ReadData()
